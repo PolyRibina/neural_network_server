@@ -54,7 +54,6 @@ public class Application {
         // Получаем картинку чата
         app.get("/avatar-chat", new AvatarChatHandler());
 
-
         //Заполняем описание профиля
         app.post("/profile", new FillingProfileHandler());
 

@@ -35,6 +35,7 @@ public class SseHandler implements Consumer<SseClient> {
         Sse.getInstance().addClient(sessions.get(0).getUserId(), client);
 
         client.sendEvent("connect", "Test sse");
+        Sse.getInstance().getClient(sessions.get(0).getUserId()).sendEvent("isOnline", "yes");
         client.onClose(() ->  {
             Sse.getInstance().removeClient(sessions.get(0).getUserId());
         } );

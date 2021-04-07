@@ -3,12 +3,17 @@ package ru.noname.mysnake.api.handlers;
 import com.j256.ormlite.stmt.QueryBuilder;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
+import kotlin.Unit;
 import org.jetbrains.annotations.NotNull;
 import ru.noname.mysnake.api.Sse;
-import ru.noname.mysnake.db.Database;
 import ru.noname.mysnake.db.models.Session;
 
-import java.util.List;
+import java.util.Timer;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
+
 
 public class OnlineHandler implements Handler {
     @Override
@@ -21,11 +26,40 @@ public class OnlineHandler implements Handler {
             return;
         }
 
-        if(Sse.getInstance().getClient(session.getUserId()) == null){
-            ctx.json("Offline");
-        }
-        else{
-            ctx.json("Online");
-        }
+        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+        Runnable toRun = new Runnable() {
+            public void run() {
+                Sse.getInstance().getClient(session.getUserId()).sendEvent("isOnline", "yes");
+            }
+        };
+        ScheduledFuture<?> handle = scheduler.scheduleAtFixedRate(toRun, 1, 3, TimeUnit.SECONDS);
+        /*(new Thread(new Runnable()
+        {
+
+            @Override
+            public void run()
+            {
+                while (!Thread.interrupted())
+                    try
+                    {
+                        Thread.sleep(1000);
+                        runOnUiThread(new Runnable() // start actions in UI thread
+                        {
+
+                            @Override
+                            public void run()
+                            {
+                                Sse.getInstance().getClient(session.getUserId()).sendEvent("isOnline", "yes");
+                            }
+                        });
+                    }
+                    catch (InterruptedException e)
+                    {
+                        // ooops
+                    }
+            }
+        })).start(); // the while thread will start in BG thread*/
     }
+
+
 }
