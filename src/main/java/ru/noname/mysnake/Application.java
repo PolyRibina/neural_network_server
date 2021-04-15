@@ -63,6 +63,9 @@ public class Application {
         // Список пользователей
         app.get("/get-users", new GetUsersHandler());
 
+        // Список пользователей чата
+        app.post("/get-users-chat", new GetUsersChatHandler());
+
         // Проверка на онлайн
         app.get("/online", new OnlineHandler());
     }

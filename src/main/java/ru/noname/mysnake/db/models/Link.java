@@ -14,12 +14,28 @@ public class Link {
         this.chatId = chatId;
         this.userId = userId;
     }
+    public Link(int chatId, int userId, boolean isAdmin){
+        this.chatId = chatId;
+        this.userId = userId;
+        this.isAdmin = isAdmin;
+    }
 
     @DatabaseField(columnName = "chat_id", canBeNull = false)
     private int chatId;
 
     @DatabaseField(columnName = "user_id",canBeNull = false)
     private int userId;
+
+    @DatabaseField(columnName = "is_admin",canBeNull = true)
+    private boolean isAdmin;
+
+    public boolean getIsAdmin() {
+        return isAdmin;
+    }
+
+    public void setIsAdmin(boolean isAdmin) {
+        this.isAdmin = isAdmin;
+    }
 
     public int getChatId() {
         return chatId;

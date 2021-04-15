@@ -46,10 +46,12 @@ public class CreateChatHandler implements Handler {
         }
 
         //List<Integer> ids = new LinkedList<>();
-        links.add(new Link(chat.getId(), session.getUserId()));
+        links.add(new Link(chat.getId(), session.getUserId(), true));
         for(User user: users){
             links.add(new Link(chat.getId(), user.getId()));
         }
+
+
 
         Database.getInstance().getLinkDao().create(links);
         ctx.json(chat.getId());
