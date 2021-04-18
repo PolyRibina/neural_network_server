@@ -54,5 +54,8 @@ ru/noname/mysnake/api/handlers/CreateChatHandler.java
 ru/noname/mysnake/api/handlers/LeaveFromChatHandler.java
  ru.noname.mysnake.api.handlers.LeaveFromChatHandler
  ru.noname.mysnake.api.handlers.LeaveFromChatHandler$LeaveFromChatRequest
+ru/noname/mysnake/api/handlers/AddToChatHandler.java
+ ru.noname.mysnake.api.handlers.AddToChatHandler
+ ru.noname.mysnake.api.handlers.AddToChatHandler$AddToChatRequest
 ru/noname/mysnake/Application.java
  ru.noname.mysnake.Application

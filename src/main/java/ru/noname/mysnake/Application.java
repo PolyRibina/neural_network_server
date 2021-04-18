@@ -40,6 +40,9 @@ public class Application {
         // Выход из чата
         app.post("/leave-from-chat", new LeaveFromChatHandler());
 
+        // Добавление чата
+        app.post("/add-to-chat", new AddToChatHandler());
+
         app.sse("/sse", new SseHandler());
 
         // Восстановление истории чата
