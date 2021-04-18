@@ -7,6 +7,11 @@ import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 import ru.noname.mysnake.db.models.*;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 public class Database {
 
     private final static String DATABASE_URL = "jdbc:sqlite:sqlite\\my.db";
@@ -16,9 +21,10 @@ public class Database {
     private Dao<Message, Integer> messageDao;
     private Dao<Link, Integer> linkDao;
     private Dao<Session, Integer> sessionDao;
+    ConnectionSource connectionSource = null;
 
     public void connect() throws Exception {
-        ConnectionSource connectionSource = null;
+
 
         try {
 
@@ -65,6 +71,19 @@ public class Database {
     public Dao<Session, Integer> getSessionDao() {
         return sessionDao;
     }
+
+    public void deleteLink(Integer chatId, Integer userId) throws SQLException {
+        String sql = "DELETE FROM links WHERE chat_id = '" +chatId+ "' AND user_id = '" +userId+ "'";
+
+        String url = "jdbc:sqlite:sqlite\\my.db";
+        Connection connection = DriverManager.getConnection(url);
+
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)){
+            preparedStatement.executeUpdate();
+        }
+    }
+
 
     private static Database db;
 

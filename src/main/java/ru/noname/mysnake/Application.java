@@ -37,6 +37,9 @@ public class Application {
         // Создание нового чата
         app.post("/new-chat", new CreateChatHandler());
 
+        // Выход из чата
+        app.post("/leave-from-chat", new LeaveFromChatHandler());
+
         app.sse("/sse", new SseHandler());
 
         // Восстановление истории чата

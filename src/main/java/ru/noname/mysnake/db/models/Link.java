@@ -20,13 +20,13 @@ public class Link {
         this.isAdmin = isAdmin;
     }
 
-    @DatabaseField(columnName = "chat_id", canBeNull = false)
+    @DatabaseField(columnName = "chat_id", uniqueCombo = true, canBeNull = false)
     private int chatId;
 
-    @DatabaseField(columnName = "user_id",canBeNull = false)
+    @DatabaseField(columnName = "user_id", uniqueCombo = true, canBeNull = false)
     private int userId;
 
-    @DatabaseField(columnName = "is_admin",canBeNull = true)
+    @DatabaseField(columnName = "is_admin", canBeNull = true)
     private boolean isAdmin;
 
     public boolean getIsAdmin() {

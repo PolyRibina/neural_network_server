@@ -1,5 +1,6 @@
-ru/noname/mysnake/api/handlers/AuthHandler.java
- ru.noname.mysnake.api.handlers.AuthHandler
+ru/noname/mysnake/api/handlers/OnlineHandler.java
+ ru.noname.mysnake.api.handlers.OnlineHandler
+ ru.noname.mysnake.api.handlers.OnlineHandler$1
 ru/noname/mysnake/db/models/User.java
  ru.noname.mysnake.db.models.User
 ru/noname/mysnake/db/models/Message.java
@@ -10,46 +11,48 @@ ru/noname/mysnake/api/handlers/AvatarUserUploadHandler.java
  ru.noname.mysnake.api.handlers.AvatarUserUploadHandler
 ru/noname/mysnake/db/models/Session.java
  ru.noname.mysnake.db.models.Session
-ru/noname/mysnake/api/handlers/SseHandler.java
- ru.noname.mysnake.api.handlers.SseHandler
+ru/noname/mysnake/api/handlers/AvatarChatUploadHandler.java
+ ru.noname.mysnake.api.handlers.AvatarChatUploadHandler
+ ru.noname.mysnake.api.handlers.AvatarChatUploadHandler$AvatarChatUploadRequest
 ru/noname/mysnake/api/handlers/AvatarUserHandler.java
  ru.noname.mysnake.api.handlers.AvatarUserHandler
 ru/noname/mysnake/api/Sse.java
  ru.noname.mysnake.api.Sse
-ru/noname/mysnake/api/handlers/FillingProfileHandler.java
- ru.noname.mysnake.api.handlers.FillingProfileHandler
- ru.noname.mysnake.api.handlers.FillingProfileHandler$FillingProfileRequest
+ru/noname/mysnake/api/handlers/AvatarChatHandler.java
+ ru.noname.mysnake.api.handlers.AvatarChatHandler
 ru/noname/mysnake/db/models/Chat.java
  ru.noname.mysnake.db.models.Chat
-ru/noname/mysnake/api/handlers/GetUsersHandler.java
- ru.noname.mysnake.api.handlers.GetUsersHandler
+ru/noname/mysnake/db/models/Link.java
+ ru.noname.mysnake.db.models.Link
+ru/noname/mysnake/api/handlers/AuthHandler.java
+ ru.noname.mysnake.api.handlers.AuthHandler
 ru/noname/mysnake/api/handlers/GetHistoryHandler.java
  ru.noname.mysnake.api.handlers.GetHistoryHandler
  ru.noname.mysnake.api.handlers.GetHistoryHandler$GetHistoryRequest
-ru/noname/mysnake/api/handlers/Auth.java
- ru.noname.mysnake.api.handlers.Auth
-ru/noname/mysnake/api/handlers/OnlineHandler.java
- ru.noname.mysnake.api.handlers.OnlineHandler
- ru.noname.mysnake.api.handlers.OnlineHandler$1
-ru/noname/mysnake/api/handlers/AvatarChatUploadHandler.java
- ru.noname.mysnake.api.handlers.AvatarChatUploadHandler
- ru.noname.mysnake.api.handlers.AvatarChatUploadHandler$AvatarChatUploadRequest
-ru/noname/mysnake/api/handlers/AvatarChatHandler.java
- ru.noname.mysnake.api.handlers.AvatarChatHandler
+ru/noname/mysnake/db/Database.java
+ ru.noname.mysnake.db.Database
+ru/noname/mysnake/api/handlers/GetUsersHandler.java
+ ru.noname.mysnake.api.handlers.GetUsersHandler
+ru/noname/mysnake/api/handlers/GetUsersChatHandler.java
+ ru.noname.mysnake.api.handlers.GetUsersChatHandler
+ ru.noname.mysnake.api.handlers.GetUsersChatHandler$GetUsersChatRequest
+ru/noname/mysnake/api/handlers/SseHandler.java
+ ru.noname.mysnake.api.handlers.SseHandler
+ru/noname/mysnake/api/handlers/FillingProfileHandler.java
+ ru.noname.mysnake.api.handlers.FillingProfileHandler
+ ru.noname.mysnake.api.handlers.FillingProfileHandler$FillingProfileRequest
 ru/noname/mysnake/api/handlers/SendMessageHandler.java
  ru.noname.mysnake.api.handlers.SendMessageHandler
  ru.noname.mysnake.api.handlers.SendMessageHandler$SendMessageRequest
+ru/noname/mysnake/api/handlers/Auth.java
+ ru.noname.mysnake.api.handlers.Auth
 ru/noname/mysnake/api/handlers/GetChatsHandler.java
  ru.noname.mysnake.api.handlers.GetChatsHandler
 ru/noname/mysnake/api/handlers/CreateChatHandler.java
  ru.noname.mysnake.api.handlers.CreateChatHandler
  ru.noname.mysnake.api.handlers.CreateChatHandler$CreateChatRequest
-ru/noname/mysnake/db/Database.java
- ru.noname.mysnake.db.Database
-ru/noname/mysnake/db/models/Link.java
- ru.noname.mysnake.db.models.Link
+ru/noname/mysnake/api/handlers/LeaveFromChatHandler.java
+ ru.noname.mysnake.api.handlers.LeaveFromChatHandler
+ ru.noname.mysnake.api.handlers.LeaveFromChatHandler$LeaveFromChatRequest
 ru/noname/mysnake/Application.java
  ru.noname.mysnake.Application
-ru/noname/mysnake/api/handlers/GetUsersChatHandler.java
- ru.noname.mysnake.api.handlers.GetUsersChatHandler
- ru.noname.mysnake.api.handlers.GetUsersChatHandler$GetUsersChatRequest
