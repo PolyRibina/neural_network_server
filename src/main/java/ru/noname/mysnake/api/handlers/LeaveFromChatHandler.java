@@ -29,10 +29,7 @@ public class LeaveFromChatHandler implements Handler {
         for(Link link: links){
 
             if(link.getUserId()==leaveFromChatRequest.getUserId()){
-
-                Database.getInstance().deleteLink(link.getChatId(), link.getUserId());
-                //System.out.println(
-                // Database.getInstance().getLinkDao().delete(link));
+                Database.getInstance().getLinkDao().executeRaw("DELETE FROM links WHERE chat_id = '" +link.getChatId()+ "' AND user_id = '" +link.getUserId()+ "'");
             }
         }
 

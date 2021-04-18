@@ -72,19 +72,6 @@ public class Database {
         return sessionDao;
     }
 
-    public void deleteLink(Integer chatId, Integer userId) throws SQLException {
-        String sql = "DELETE FROM links WHERE chat_id = '" +chatId+ "' AND user_id = '" +userId+ "'";
-
-        String url = "jdbc:sqlite:sqlite\\my.db";
-        Connection connection = DriverManager.getConnection(url);
-
-
-        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)){
-            preparedStatement.executeUpdate();
-        }
-    }
-
-
     private static Database db;
 
     public static Database getInstance() {
