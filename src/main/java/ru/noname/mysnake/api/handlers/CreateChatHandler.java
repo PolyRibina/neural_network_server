@@ -54,6 +54,7 @@ public class CreateChatHandler implements Handler {
 
 
         Database.getInstance().getLinkDao().create(links);
+        new RefreshHandler().handle(ctx);
         ctx.json(chat.getId());
     }
 

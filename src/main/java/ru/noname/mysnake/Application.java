@@ -43,7 +43,12 @@ public class Application {
         // Добавление чата
         app.post("/add-to-chat", new AddToChatHandler());
 
+        // Назначение админа чата
+        app.post("/set-admin-chat", new SetAdminChatHandler());
+
         app.sse("/sse", new SseHandler());
+
+        //app.get("/refresh", new RefreshHandler());
 
         // Восстановление истории чата
         app.post("/get-history", new GetHistoryHandler());

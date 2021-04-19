@@ -20,6 +20,11 @@ public class Sse {
         return clients.get(id);
     }
 
+    // Получение всех пользователей
+    public HashMap<Integer, SseClient> getAllClient(){
+        return clients;
+    }
+
     // Удаление пользователя
     public void removeClient(Integer userId){
         clients.remove(userId);
