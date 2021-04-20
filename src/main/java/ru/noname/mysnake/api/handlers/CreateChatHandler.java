@@ -1,16 +1,20 @@
 package ru.noname.mysnake.api.handlers;
 
+import com.google.gson.Gson;
 import com.j256.ormlite.stmt.QueryBuilder;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
+import io.javalin.http.sse.SseClient;
 import org.jetbrains.annotations.NotNull;
 
+import ru.noname.mysnake.api.Sse;
 import ru.noname.mysnake.db.Database;
 import ru.noname.mysnake.db.models.Chat;
 import ru.noname.mysnake.db.models.Link;
 import ru.noname.mysnake.db.models.Session;
 import ru.noname.mysnake.db.models.User;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -51,10 +55,13 @@ public class CreateChatHandler implements Handler {
             links.add(new Link(chat.getId(), user.getId()));
         }
 
-
-
         Database.getInstance().getLinkDao().create(links);
-        new RefreshHandler().handle(ctx);
+
+        for(Link link: links){
+            Gson gson = new Gson();
+            Sse.getInstance().getClient(link.getUserId()).sendEvent("newChat", gson.toJson(chat));
+        }
+
         ctx.json(chat.getId());
     }
 

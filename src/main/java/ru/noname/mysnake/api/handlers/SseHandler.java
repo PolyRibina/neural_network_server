@@ -1,5 +1,6 @@
 package ru.noname.mysnake.api.handlers;
 
+import com.google.gson.Gson;
 import com.j256.ormlite.stmt.QueryBuilder;
 import io.javalin.http.sse.SseClient;
 import ru.noname.mysnake.api.Sse;
@@ -10,6 +11,7 @@ import javax.servlet.AsyncEvent;
 import javax.servlet.AsyncListener;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -35,9 +37,20 @@ public class SseHandler implements Consumer<SseClient> {
         Sse.getInstance().addClient(sessions.get(0).getUserId(), client);
 
         client.sendEvent("connect", "Test sse");
-        Sse.getInstance().getClient(sessions.get(0).getUserId()).sendEvent("isOnline", "yes");
+
+        HashMap<Integer, SseClient> users =  Sse.getInstance().getAllClient();
+
+        Gson gson = new Gson();
+
+        for(SseClient clientSse: users.values()){
+            clientSse.sendEvent("userOnline", gson.toJson(sessions.get(0).getUserId()));
+        }
+        //Sse.getInstance().getClient(sessions.get(0).getUserId()).sendEvent("isOnline", "yes");
         client.onClose(() ->  {
             Sse.getInstance().removeClient(sessions.get(0).getUserId());
+            for(SseClient clientSse: users.values()){
+                clientSse.sendEvent("userNotOnline", gson.toJson(sessions.get(0).getUserId()));
+            }
         } );
 
     }

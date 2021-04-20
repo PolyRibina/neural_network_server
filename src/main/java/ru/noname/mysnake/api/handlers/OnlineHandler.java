@@ -34,7 +34,7 @@ public class OnlineHandler implements Handler {
         };
         ScheduledFuture<?> handle = scheduler.scheduleAtFixedRate(toRun, 1, 3, TimeUnit.SECONDS);
 
-        new RefreshHandler().handle(ctx);
+        ctx.result("{}");
         /*(new Thread(new Runnable()
         {
 

@@ -1,10 +1,13 @@
 package ru.noname.mysnake.api.handlers;
 
+import com.google.gson.Gson;
 import com.j256.ormlite.stmt.QueryBuilder;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
+import io.javalin.http.sse.SseClient;
 import org.jetbrains.annotations.NotNull;
 
+import ru.noname.mysnake.api.Sse;
 import ru.noname.mysnake.api.models.UserRequest;
 import ru.noname.mysnake.db.Database;
 import ru.noname.mysnake.db.models.Session;
@@ -29,8 +32,13 @@ public class AuthHandler implements Handler {
             User user = new User(userRequest.getName(), userRequest.getPassword());
             Database.getInstance().getUserDao().create(user);
             users.add(user);
-        }
 
+            HashMap<Integer, SseClient> usersSse =  Sse.getInstance().getAllClient();
+            Gson gson = new Gson();
+            for(SseClient clientSse: usersSse.values()){
+                clientSse.sendEvent("newUser", gson.toJson(user));
+            }
+        }
 
         if (userRequest.getPassword().equals(users.get(0).getPassword())) {
             UUID uuid = UUID.randomUUID();

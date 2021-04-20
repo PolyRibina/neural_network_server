@@ -13,11 +13,19 @@ public class Chat {
         this.name = name;
     }
 
+    public Chat(String name, String bio){
+        this.name = name;
+        this.bio = bio;
+    }
+
     @DatabaseField(generatedId = true)
     private int id;
 
     @DatabaseField(canBeNull = false)
     private String name; // название чата
+
+    @DatabaseField(canBeNull = true)
+    private String bio; // описание чата
 
     public int getId() {
         return id;
@@ -33,5 +41,13 @@ public class Chat {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String name) {
+        this.bio = bio;
     }
 }

@@ -48,8 +48,6 @@ public class Application {
 
         app.sse("/sse", new SseHandler());
 
-        //app.get("/refresh", new RefreshHandler());
-
         // Восстановление истории чата
         app.post("/get-history", new GetHistoryHandler());
 
