@@ -27,7 +27,7 @@ public class AddToChatHandler implements Handler {
         Database.getInstance().getLinkDao().create(new Link(addToChatRequest.getChatId(), users.get(0).getId()));
 
         Gson gson = new Gson();
-        Sse.getInstance().getClient(users.get(0).getId()).sendEvent("newChat", gson.toJson(addToChatRequest.getChatId()));
+        Sse.getInstance().getClient(users.get(0).getId()).sendEvent("newChat", "add to chat");
 
         ctx.json("success");
     }

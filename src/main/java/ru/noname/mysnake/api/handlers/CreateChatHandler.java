@@ -59,7 +59,7 @@ public class CreateChatHandler implements Handler {
 
         for(Link link: links){
             Gson gson = new Gson();
-            Sse.getInstance().getClient(link.getUserId()).sendEvent("newChat", gson.toJson(chat));
+            Sse.getInstance().getClient(link.getUserId()).sendEvent("newChat", "new chat");
         }
 
         ctx.json(chat.getId());

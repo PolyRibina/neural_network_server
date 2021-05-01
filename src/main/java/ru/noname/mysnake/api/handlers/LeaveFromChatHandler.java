@@ -33,7 +33,7 @@ public class LeaveFromChatHandler implements Handler {
             if(link.getUserId()==leaveFromChatRequest.getUserId()){
                 Database.getInstance().getLinkDao().executeRaw("DELETE FROM links WHERE chat_id = '" +link.getChatId()+ "' AND user_id = '" +link.getUserId()+ "'");
                 Gson gson = new Gson();
-                Sse.getInstance().getClient(link.getUserId()).sendEvent("deleteChat", gson.toJson(link.getChatId()));
+                Sse.getInstance().getClient(link.getUserId()).sendEvent("newChat","leave from chat");
             }
         }
 

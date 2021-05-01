@@ -47,7 +47,7 @@ public class Chat {
         return bio;
     }
 
-    public void setBio(String name) {
+    public void setBio(String bio) {
         this.bio = bio;
     }
 }

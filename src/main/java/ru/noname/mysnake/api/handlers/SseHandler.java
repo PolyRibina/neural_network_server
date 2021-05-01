@@ -43,13 +43,13 @@ public class SseHandler implements Consumer<SseClient> {
         Gson gson = new Gson();
 
         for(SseClient clientSse: users.values()){
-            clientSse.sendEvent("userOnline", gson.toJson(sessions.get(0).getUserId()));
+            clientSse.sendEvent("newUser", "user online");
         }
         //Sse.getInstance().getClient(sessions.get(0).getUserId()).sendEvent("isOnline", "yes");
         client.onClose(() ->  {
             Sse.getInstance().removeClient(sessions.get(0).getUserId());
             for(SseClient clientSse: users.values()){
-                clientSse.sendEvent("userNotOnline", gson.toJson(sessions.get(0).getUserId()));
+                clientSse.sendEvent("newUser", "user not online");
             }
         } );
 

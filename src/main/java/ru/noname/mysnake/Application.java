@@ -66,6 +66,9 @@ public class Application {
         //Заполняем описание профиля
         app.post("/profile", new FillingProfileHandler());
 
+        //Заполняем описание чата
+        app.post("/edit-chat", new FillingChatHandler());
+
         // Список чатов
         app.get("/get-chats", new GetChatsHandler());
 
