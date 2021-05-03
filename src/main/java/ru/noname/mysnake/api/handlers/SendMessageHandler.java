@@ -21,7 +21,6 @@ public class SendMessageHandler implements Handler {
 
     @Override
     public void handle(@NotNull Context ctx) throws Exception {
-        //SendMessageRequest sendMessageRequest = ctx.bodyAsClass(SendMessageRequest.class);
 
         //Получаем id создателя сообщения
         Session session = Auth.getSession(ctx);
