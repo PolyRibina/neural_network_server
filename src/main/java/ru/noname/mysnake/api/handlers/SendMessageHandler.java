@@ -12,7 +12,6 @@ import ru.noname.mysnake.db.Database;
 import ru.noname.mysnake.db.models.*;
 
 import java.io.File;
-import java.sql.SQLOutput;
 import java.util.Date;
 import java.util.List;
 
@@ -35,25 +34,27 @@ public class SendMessageHandler implements Handler {
         Message message = new Message(session.getUserId(), parseInt(ctx.queryParam("chatId")), ctx.queryParam("message"), new Date());
         Database.getInstance().getMessageDao().create(message);
 
-        // Работа с загружаемым файлом
-        UploadedFile file = ctx.uploadedFile("attach");
+        if(!ctx.queryParam("type").equals("")){
+            // Работа с загружаемым файлом
+            UploadedFile file = ctx.uploadedFile("attach");
 
-        String myType = "";
-        if(ctx.queryParam("type").equals("image")){
-            myType = ".jpeg";
-        }
-        else if (ctx.queryParam("type").equals("video")){
-            myType = ".mp4";
-        }
-        else{
-            myType = ".mp3";
-        }
-        FileUtils.copyInputStreamToFile(file.getContent(), new File("fileInMessage/messageId=" + message.getId() + myType));
-        //http://localhost:8000/file-in-message?messageId=17&type=image
+            String myType = "";
+            if(ctx.queryParam("type").equals("image")){
+                myType = ".jpeg";
+            }
+            else if (ctx.queryParam("type").equals("video")){
+                myType = ".mp4";
+            }
+            else {
+                myType = ".mp3";
+            }
+            FileUtils.copyInputStreamToFile(file.getContent(), new File("fileInMessage/messageId=" + message.getId() + myType));
+            //http://localhost:8000/file-in-message?messageId=26&type=image
 
-        message.setFileInMessage("file-in-message?messageId=" + message.getId()+ "&type=" + ctx.queryParam("type"));
-        message.setType(ctx.queryParam("type"));
-        Database.getInstance().getMessageDao().createOrUpdate(message);
+            message.setFileInMessage("file-in-message?messageId=" + message.getId()+ "&type=" + ctx.queryParam("type"));
+            message.setType(ctx.queryParam("type"));
+            Database.getInstance().getMessageDao().createOrUpdate(message);
+        }
 
 
         // Получаем чат-пользователь
