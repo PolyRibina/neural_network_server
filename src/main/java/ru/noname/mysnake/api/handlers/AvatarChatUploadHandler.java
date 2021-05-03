@@ -14,19 +14,17 @@ public class AvatarChatUploadHandler implements Handler {
     @Override
     public void handle(@NotNull Context ctx) throws Exception {
 
-
-
         UploadedFile file = ctx.uploadedFile("avatar");
         FileUtils.copyInputStreamToFile(file.getContent(), new File("avatars/chatId=" + ctx.queryParam("chatId") + ".jpeg"));
         ctx.json("Success");
     }
-    static class AvatarChatUploadRequest {
+    //static class AvatarChatUploadRequest {
 
-        private Integer chatId;
+     //   private Integer chatId;
 
-        public Integer getChatId() {
-            return chatId;
-        }
+    //    public Integer getChatId() {
+    //        return chatId;
+    //    }
 
-    }
+    //}
 }

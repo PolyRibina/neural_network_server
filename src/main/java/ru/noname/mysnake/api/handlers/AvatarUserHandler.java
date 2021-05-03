@@ -10,6 +10,7 @@ import ru.noname.mysnake.db.models.Session;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 
 public class AvatarUserHandler implements Handler {
@@ -17,8 +18,12 @@ public class AvatarUserHandler implements Handler {
     public void handle(@NotNull Context ctx) throws Exception {
 
         String userId = ctx.queryParam("userId");
-        FileInputStream inputFile = new FileInputStream("avatars/userId=" + userId + ".jpeg");
-        ctx.result (inputFile);
-
+        try{
+            FileInputStream inputFile = new FileInputStream("avatars/userId=" + userId + ".jpeg");
+            ctx.result (inputFile);
+        }
+        catch (FileNotFoundException e){
+            System.out.println("Пользователь " + userId + " без аватарки.");
+        }
     }
 }

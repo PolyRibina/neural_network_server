@@ -59,7 +59,13 @@ public class CreateChatHandler implements Handler {
 
         for(Link link: links){
             Gson gson = new Gson();
-            Sse.getInstance().getClient(link.getUserId()).sendEvent("newChat", "new chat");
+            try {
+                Sse.getInstance().getClient(link.getUserId()).sendEvent("newChat", "new chat");
+            }
+            catch (NullPointerException e){
+                System.out.println("Клиент не в сети, поэтому обновление не произошло.");
+            }
+
         }
 
         ctx.json(chat.getId());

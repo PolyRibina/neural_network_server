@@ -34,6 +34,28 @@ public class Message {
     @DatabaseField(canBeNull = false)
     private String text;
 
+    @DatabaseField(columnName = "file", canBeNull = true)
+    private String fileInMessage;
+
+    @DatabaseField(columnName = "type", canBeNull = true)
+    private String type;
+
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getFileInMessage() {
+        return fileInMessage;
+    }
+
+    public void setFileInMessage(String fileInMessage) {
+        this.fileInMessage = fileInMessage;
+    }
 
     public String getText() {
         return text;

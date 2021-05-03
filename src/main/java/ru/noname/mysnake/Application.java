@@ -63,6 +63,9 @@ public class Application {
         // Получаем картинку чата
         app.get("/avatar-chat", new AvatarChatHandler());
 
+        // Получаем файл сообщения
+        app.get("/file-in-message", new GetFileInMessageHandler());
+
         //Заполняем описание профиля
         app.post("/profile", new FillingProfileHandler());
 
