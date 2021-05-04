@@ -39,7 +39,7 @@ public class CreateChatHandler implements Handler {
         //Заполняем таблицу ссылок чат-пользователь
         List<Link> links = new LinkedList<>();
 
-        String[] usersStr = createChatRequest.getUsersNames().split( " ");
+        String[] usersStr = createChatRequest.getUsersNames().split( ", ");
 
         List<User> users = new LinkedList<>();
 

@@ -1,6 +1,5 @@
-ru/noname/mysnake/api/handlers/CreateChatHandler.java
- ru.noname.mysnake.api.handlers.CreateChatHandler
- ru.noname.mysnake.api.handlers.CreateChatHandler$CreateChatRequest
+ru/noname/mysnake/api/handlers/GetFileInMessageHandler.java
+ ru.noname.mysnake.api.handlers.GetFileInMessageHandler
 ru/noname/mysnake/db/models/User.java
  ru.noname.mysnake.db.models.User
 ru/noname/mysnake/api/handlers/SetAdminChatHandler.java
@@ -59,10 +58,11 @@ ru/noname/mysnake/db/models/Message.java
  ru.noname.mysnake.db.models.Message
 ru/noname/mysnake/api/handlers/AvatarChatHandler.java
  ru.noname.mysnake.api.handlers.AvatarChatHandler
-ru/noname/mysnake/api/handlers/GetFileInMessageHandler.java
- ru.noname.mysnake.api.handlers.GetFileInMessageHandler
 ru/noname/mysnake/api/handlers/SendMessageHandler.java
  ru.noname.mysnake.api.handlers.SendMessageHandler
  ru.noname.mysnake.api.handlers.SendMessageHandler$SendMessageRequest
+ru/noname/mysnake/api/handlers/CreateChatHandler.java
+ ru.noname.mysnake.api.handlers.CreateChatHandler
+ ru.noname.mysnake.api.handlers.CreateChatHandler$CreateChatRequest
 ru/noname/mysnake/Application.java
  ru.noname.mysnake.Application
