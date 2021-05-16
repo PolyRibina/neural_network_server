@@ -40,6 +40,16 @@ public class Message {
     @DatabaseField(columnName = "type", canBeNull = true)
     private String type;
 
+    @DatabaseField(columnName = "is_edited", canBeNull = true)
+    private Boolean isEdited;
+
+    public Boolean getIsEdited() {
+        return isEdited;
+    }
+
+    public void setIsEdited(Boolean isEdited) {
+        this.isEdited = isEdited;
+    }
 
     public String getType() {
         return type;

@@ -83,5 +83,11 @@ public class Application {
 
         // Проверка на онлайн
         app.get("/online", new OnlineHandler());
+
+        app.post("/delete-message", new DeleteMessageHandler());
+
+        app.post("/get-is-admin", new GetIsAdminHandler());
+
+        app.post("/edit-message", new EditMessageHandler());
     }
 }
