@@ -3,6 +3,8 @@ package ru.noname.mysnake.db.models;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
+import java.util.Date;
+
 @DatabaseTable(tableName = "links")
 public class Link {
 
@@ -28,6 +30,18 @@ public class Link {
 
     @DatabaseField(columnName = "is_admin", canBeNull = true)
     private boolean isAdmin;
+
+    @DatabaseField(canBeNull = true)
+    private Date checkChat; // дата последнего прочтения чата
+
+
+    public Date getСheckChat() {
+        return checkChat;
+    }
+
+    public void setCheckChat(Date checkChat) {
+        this.checkChat = checkChat;
+    }
 
     public boolean getIsAdmin() {
         return isAdmin;

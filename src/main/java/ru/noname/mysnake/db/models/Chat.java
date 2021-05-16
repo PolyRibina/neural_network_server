@@ -3,6 +3,7 @@ package ru.noname.mysnake.db.models;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
+
 @DatabaseTable(tableName = "chats")
 public class Chat {
 
@@ -26,6 +27,7 @@ public class Chat {
 
     @DatabaseField(canBeNull = true)
     private String bio; // описание чата
+
 
     public int getId() {
         return id;
