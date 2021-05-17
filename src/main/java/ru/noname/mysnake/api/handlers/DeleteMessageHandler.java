@@ -11,6 +11,7 @@ import ru.noname.mysnake.db.models.Link;
 import ru.noname.mysnake.db.models.Message;
 import ru.noname.mysnake.db.models.Session;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class DeleteMessageHandler implements Handler {
@@ -32,8 +33,22 @@ public class DeleteMessageHandler implements Handler {
         List<Message> message = Database.getInstance().getMessageDao().query(statementBuilder.prepare());
 
         Database.getInstance().getMessageDao().executeRaw("DELETE FROM messages WHERE id = " +message.get(0).getId());
-        Gson gson = new Gson();
-        Sse.getInstance().getClient(session.getUserId()).sendEvent("message","delete message from chat");
+
+        QueryBuilder<Link, Integer> statementBuilderLink = Database.getInstance().getLinkDao().queryBuilder();
+        statementBuilderLink.where().eq("chat_id", message.get(0).getChatId());
+        List<Link> links = Database.getInstance().getLinkDao().query(statementBuilderLink.prepare());
+
+        for(Link link: links){
+
+            Gson gson = new Gson();
+            try {
+                Sse.getInstance().getClient(link.getUserId()).sendEvent("deleteMessage", gson.toJson(message));
+            }
+            catch (NullPointerException e){
+                System.out.println("Клиент " + link.getUserId() + " не в сети, поэтому обновление не произошло.");
+            }
+        }
+
     }
     static class DeleteMessageRequest {
 

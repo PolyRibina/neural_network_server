@@ -2,17 +2,17 @@ ru/noname/mysnake/api/handlers/AuthHandler.java
  ru.noname.mysnake.api.handlers.AuthHandler
 ru/noname/mysnake/db/models/User.java
  ru.noname.mysnake.db.models.User
-ru/noname/mysnake/db/models/Message.java
- ru.noname.mysnake.db.models.Message
+ru/noname/mysnake/db/models/Chat.java
+ ru.noname.mysnake.db.models.Chat
 ru/noname/mysnake/api/handlers/FillingProfileHandler.java
  ru.noname.mysnake.api.handlers.FillingProfileHandler
  ru.noname.mysnake.api.handlers.FillingProfileHandler$FillingProfileRequest
 ru/noname/mysnake/api/handlers/GetHistoryHandler.java
  ru.noname.mysnake.api.handlers.GetHistoryHandler
  ru.noname.mysnake.api.handlers.GetHistoryHandler$GetHistoryRequest
-ru/noname/mysnake/api/handlers/DeleteMessageHandler.java
- ru.noname.mysnake.api.handlers.DeleteMessageHandler
- ru.noname.mysnake.api.handlers.DeleteMessageHandler$DeleteMessageRequest
+ru/noname/mysnake/api/handlers/FillingChatHandler.java
+ ru.noname.mysnake.api.handlers.FillingChatHandler
+ ru.noname.mysnake.api.handlers.FillingChatHandler$FillingChatRequest
 ru/noname/mysnake/api/handlers/SseHandler.java
  ru.noname.mysnake.api.handlers.SseHandler
 ru/noname/mysnake/api/handlers/AvatarChatHandler.java
@@ -49,9 +49,9 @@ ru/noname/mysnake/db/models/Session.java
 ru/noname/mysnake/api/handlers/AddToChatHandler.java
  ru.noname.mysnake.api.handlers.AddToChatHandler
  ru.noname.mysnake.api.handlers.AddToChatHandler$AddToChatRequest
-ru/noname/mysnake/api/handlers/SendMessageHandler.java
- ru.noname.mysnake.api.handlers.SendMessageHandler
- ru.noname.mysnake.api.handlers.SendMessageHandler$SendMessageRequest
+ru/noname/mysnake/api/handlers/ReadMessageHandler.java
+ ru.noname.mysnake.api.handlers.ReadMessageHandler
+ ru.noname.mysnake.api.handlers.ReadMessageHandler$ReadMessageRequest
 ru/noname/mysnake/api/handlers/GetIsAdminHandler.java
  ru.noname.mysnake.api.handlers.GetIsAdminHandler
  ru.noname.mysnake.api.handlers.GetIsAdminHandler$GetIsAdminRequest
@@ -66,14 +66,17 @@ ru/noname/mysnake/api/handlers/GetChatsHandler.java
 ru/noname/mysnake/api/handlers/CreateChatHandler.java
  ru.noname.mysnake.api.handlers.CreateChatHandler
  ru.noname.mysnake.api.handlers.CreateChatHandler$CreateChatRequest
+ru/noname/mysnake/api/handlers/SendMessageHandler.java
+ ru.noname.mysnake.api.handlers.SendMessageHandler
+ ru.noname.mysnake.api.handlers.SendMessageHandler$SendMessageRequest
+ru/noname/mysnake/db/models/Message.java
+ ru.noname.mysnake.db.models.Message
 ru/noname/mysnake/db/Database.java
  ru.noname.mysnake.db.Database
-ru/noname/mysnake/api/handlers/FillingChatHandler.java
- ru.noname.mysnake.api.handlers.FillingChatHandler
- ru.noname.mysnake.api.handlers.FillingChatHandler$FillingChatRequest
-ru/noname/mysnake/db/models/Chat.java
- ru.noname.mysnake.db.models.Chat
 ru/noname/mysnake/api/handlers/EditMessageHandler.java
  ru.noname.mysnake.api.handlers.EditMessageHandler
+ru/noname/mysnake/api/handlers/DeleteMessageHandler.java
+ ru.noname.mysnake.api.handlers.DeleteMessageHandler
+ ru.noname.mysnake.api.handlers.DeleteMessageHandler$DeleteMessageRequest
 ru/noname/mysnake/Application.java
  ru.noname.mysnake.Application

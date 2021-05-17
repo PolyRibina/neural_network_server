@@ -9,11 +9,15 @@ import org.apache.commons.io.FileUtils;
 import org.jetbrains.annotations.NotNull;
 import ru.noname.mysnake.api.Sse;
 import ru.noname.mysnake.db.Database;
+import ru.noname.mysnake.db.models.Link;
 import ru.noname.mysnake.db.models.Message;
 import ru.noname.mysnake.db.models.Session;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+
+import static java.lang.Integer.parseInt;
 
 public class EditMessageHandler implements Handler {
     @Override
@@ -31,8 +35,11 @@ public class EditMessageHandler implements Handler {
 
         List<Message> message = Database.getInstance().getMessageDao().query(statementBuilder.prepare());
 
+        List<Message> oldMessage = Database.getInstance().getMessageDao().query(statementBuilder.prepare());
+
         message.get(0).setText(ctx.queryParam("messageText"));
         message.get(0).setIsEdited(true);
+        message.get(0).setWasRead(false);
 
         if(!ctx.queryParam("type").equals("")){
             // Работа с загружаемым файлом
@@ -60,8 +67,26 @@ public class EditMessageHandler implements Handler {
 
         Database.getInstance().getMessageDao().update(message.get(0));
 
-        Gson gson = new Gson();
-        Sse.getInstance().getClient(session.getUserId()).sendEvent("message","edit message from chat");
+
+        QueryBuilder<Link, Integer> statementBuilderLink = Database.getInstance().getLinkDao().queryBuilder();
+        statementBuilderLink.where().eq("chat_id", message.get(0).getChatId());
+        List<Link> links = Database.getInstance().getLinkDao().query(statementBuilderLink.prepare());
+
+        for(Link link: links){
+
+            Gson gson = new Gson();
+            HashMap<String, Object> messages = new HashMap<>();
+
+            messages.put("old", oldMessage.get(0));
+            messages.put("new", message.get(0));
+
+            try {
+                Sse.getInstance().getClient(link.getUserId()).sendEvent("edit", gson.toJson(messages));
+            }
+            catch (NullPointerException e){
+                System.out.println("Клиент " + link.getUserId() + " не в сети, поэтому обновление не произошло.");
+            }
+        }
 
         ctx.json("success editing");
     }

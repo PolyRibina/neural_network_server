@@ -89,5 +89,7 @@ public class Application {
         app.post("/get-is-admin", new GetIsAdminHandler());
 
         app.post("/edit-message", new EditMessageHandler());
+
+        app.post("/read-message", new ReadMessageHandler());
     }
 }

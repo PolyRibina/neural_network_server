@@ -43,6 +43,17 @@ public class Message {
     @DatabaseField(columnName = "is_edited", canBeNull = true)
     private Boolean isEdited;
 
+    @DatabaseField(columnName = "was_read", canBeNull = true)
+    private Boolean wasRead=false;
+
+    public Boolean getWasRead() {
+        return wasRead;
+    }
+
+    public void setWasRead(Boolean wasRead) {
+        this.wasRead = wasRead;
+    }
+
     public Boolean getIsEdited() {
         return isEdited;
     }
