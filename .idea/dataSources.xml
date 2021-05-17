@@ -6,7 +6,12 @@
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:D:\Учеба\ExactPro\mysnake-server\sqlite\my.db</jdbc-url>
-      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
+    <data-source source="LOCAL" name="my [2]" uuid="66cc2e81-2eb3-4e10-9125-d672e45a49e9">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:C:\Users\Полина\Desktop\client\server\sqlite\my.db</jdbc-url>
     </data-source>
   </component>
 </project>
