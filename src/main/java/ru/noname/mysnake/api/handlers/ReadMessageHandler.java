@@ -33,7 +33,7 @@ public class ReadMessageHandler implements Handler {
         message.get(0).setWasRead(true);
         Database.getInstance().getMessageDao().update(message.get(0));
         Gson gson = new Gson();
-        Sse.getInstance().getClient(session.getUserId()).sendEvent("message","delete message from chat");
+        Sse.getInstance().getClient(session.getUserId()).sendEvent("message","read message in chat");
     }
     static class ReadMessageRequest {
 
