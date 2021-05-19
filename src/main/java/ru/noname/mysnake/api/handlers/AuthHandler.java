@@ -51,27 +51,5 @@ public class AuthHandler implements Handler {
         } else {
             ctx.status(403);
         }
-
-
-        /*Pair<String, Integer> pair = database.findUser(userRequest.getName(), userRequest.getPassword());
-        String sessionId = pair.component1();
-
-        // нужно получить ай-ди юзера
-        sessionAndNames.put(sessionId, pair.component2());
-
-        // при входе отправляем пользователю все его чаты
-        List<String> chats = new LinkedList<>();
-        for(Integer chatId : database.getChatFromUser(pair.component2()))
-        {
-            chats.add(database.findChatById(chatId));
-            // эти чаты надо отправлять клиенту для отображения
-        }
-
-        HashMap<String, Object> data = new HashMap<>();
-        Session session = new Session();
-        session.setsessionId(sessionId);
-        data.put("session", session);
-        data.put("chats", chats);
-        ctx.json(data);*/
     }
 }

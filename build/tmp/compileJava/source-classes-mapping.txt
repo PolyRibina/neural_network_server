@@ -7,9 +7,9 @@ ru/noname/mysnake/db/models/Message.java
 ru/noname/mysnake/api/handlers/GetIsAdminHandler.java
  ru.noname.mysnake.api.handlers.GetIsAdminHandler
  ru.noname.mysnake.api.handlers.GetIsAdminHandler$GetIsAdminRequest
-ru/noname/mysnake/api/handlers/GetHistoryHandler.java
- ru.noname.mysnake.api.handlers.GetHistoryHandler
- ru.noname.mysnake.api.handlers.GetHistoryHandler$GetHistoryRequest
+ru/noname/mysnake/api/handlers/LeaveFromChatHandler.java
+ ru.noname.mysnake.api.handlers.LeaveFromChatHandler
+ ru.noname.mysnake.api.handlers.LeaveFromChatHandler$LeaveFromChatRequest
 ru/noname/mysnake/api/handlers/SetAdminChatHandler.java
  ru.noname.mysnake.api.handlers.SetAdminChatHandler
  ru.noname.mysnake.api.handlers.SetAdminChatHandler$SetAdminChatRequest
@@ -52,9 +52,9 @@ ru/noname/mysnake/db/models/Session.java
  ru.noname.mysnake.db.models.Session
 ru/noname/mysnake/db/Database.java
  ru.noname.mysnake.db.Database
-ru/noname/mysnake/api/handlers/DeleteMessageHandler.java
- ru.noname.mysnake.api.handlers.DeleteMessageHandler
- ru.noname.mysnake.api.handlers.DeleteMessageHandler$DeleteMessageRequest
+ru/noname/mysnake/api/handlers/CreateChatHandler.java
+ ru.noname.mysnake.api.handlers.CreateChatHandler
+ ru.noname.mysnake.api.handlers.CreateChatHandler$CreateChatRequest
 ru/noname/mysnake/api/handlers/GetUsersHandler.java
  ru.noname.mysnake.api.handlers.GetUsersHandler
 ru/noname/mysnake/api/handlers/FillingChatHandler.java
@@ -69,12 +69,12 @@ ru/noname/mysnake/api/handlers/FillingProfileHandler.java
  ru.noname.mysnake.api.handlers.FillingProfileHandler$FillingProfileRequest
 ru/noname/mysnake/api/handlers/GetChatsHandler.java
  ru.noname.mysnake.api.handlers.GetChatsHandler
-ru/noname/mysnake/api/handlers/CreateChatHandler.java
- ru.noname.mysnake.api.handlers.CreateChatHandler
- ru.noname.mysnake.api.handlers.CreateChatHandler$CreateChatRequest
-ru/noname/mysnake/api/handlers/LeaveFromChatHandler.java
- ru.noname.mysnake.api.handlers.LeaveFromChatHandler
- ru.noname.mysnake.api.handlers.LeaveFromChatHandler$LeaveFromChatRequest
+ru/noname/mysnake/api/handlers/GetHistoryHandler.java
+ ru.noname.mysnake.api.handlers.GetHistoryHandler
+ ru.noname.mysnake.api.handlers.GetHistoryHandler$GetHistoryRequest
+ru/noname/mysnake/api/handlers/DeleteMessageHandler.java
+ ru.noname.mysnake.api.handlers.DeleteMessageHandler
+ ru.noname.mysnake.api.handlers.DeleteMessageHandler$DeleteMessageRequest
 ru/noname/mysnake/api/handlers/ReadMessageHandler.java
  ru.noname.mysnake.api.handlers.ReadMessageHandler
  ru.noname.mysnake.api.handlers.ReadMessageHandler$ReadMessageRequest

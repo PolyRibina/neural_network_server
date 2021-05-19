@@ -13,5 +13,11 @@
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:C:\Users\Полина\Desktop\client\server\sqlite\my.db</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="mySnake_Database" uuid="e75a0d90-b10a-4c1d-8df5-baf12af5d6c3">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:C:\Users\Полина\Desktop\client\server\sqlite\mySnake_Database.db</jdbc-url>
+    </data-source>
   </component>
 </project>

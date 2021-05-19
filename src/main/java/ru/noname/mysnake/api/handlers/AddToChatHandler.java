@@ -45,20 +45,4 @@ public class AddToChatHandler implements Handler {
             return userName;
         }
     }
-
-    /*
-
-    Chat chat = ctx.bodyAsClass(Chat.class);
-
-    // надоходим id пользователя по имени
-    String str = chat.getUsers() + " " + chat.getCreator();
-    String[] users = str.split(" ");
-    List<Integer> ids = new LinkedList<>();
-    for(String user : users)
-    {
-         Integer id = database.findUserByName(user);
-         ids.add(id);
-     }
-     database.insertChat(chat.getChatName(), ids); // создаем чат
-     */
 }

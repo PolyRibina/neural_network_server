@@ -34,15 +34,22 @@ public class DeleteMessageHandler implements Handler {
 
         Database.getInstance().getMessageDao().executeRaw("DELETE FROM messages WHERE id = " +message.get(0).getId());
 
+        //Получаем список пользователей чата
         QueryBuilder<Link, Integer> statementBuilderLink = Database.getInstance().getLinkDao().queryBuilder();
         statementBuilderLink.where().eq("chat_id", message.get(0).getChatId());
         List<Link> links = Database.getInstance().getLinkDao().query(statementBuilderLink.prepare());
+
+        // Получаем сообщения по чату
+        QueryBuilder<Message, Integer> statementBuilderMess = Database.getInstance().getMessageDao().queryBuilder();
+        statementBuilderMess.where().eq("chat_id", deleteMessageRequest.getChatId());
+        List<Message> messages = Database.getInstance().getMessageDao().query(statementBuilderMess.prepare());
+
 
         for(Link link: links){
 
             Gson gson = new Gson();
             try {
-                Sse.getInstance().getClient(link.getUserId()).sendEvent("deleteMessage", gson.toJson(message));
+                Sse.getInstance().getClient(link.getUserId()).sendEvent("deleteMessage", gson.toJson(messages));
             }
             catch (NullPointerException e){
                 System.out.println("Клиент " + link.getUserId() + " не в сети, поэтому обновление не произошло.");
@@ -53,6 +60,11 @@ public class DeleteMessageHandler implements Handler {
     static class DeleteMessageRequest {
 
         private Integer messageId;
+        private Integer chatId;
+
+        public Integer getChatId() {
+            return chatId;
+        }
 
         public Integer getMessageId() {
             return messageId;

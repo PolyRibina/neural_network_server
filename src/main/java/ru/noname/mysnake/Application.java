@@ -31,8 +31,18 @@ public class Application {
         // Отправка сообщения
         app.post("/send-message", new SendMessageHandler());
 
-        // Авторизация
-        app.post("/auth", new AuthHandler());
+        // Редактирование сообщения
+        app.post("/edit-message", new EditMessageHandler());
+
+        // Чтение сообщения
+        app.post("/read-message", new ReadMessageHandler());
+
+        // Удаление сообщения
+        app.post("/delete-message", new DeleteMessageHandler());
+
+        // Получаем файл сообщения
+        app.get("/file-in-message", new GetFileInMessageHandler());
+
 
         // Создание нового чата
         app.post("/new-chat", new CreateChatHandler());
@@ -43,13 +53,17 @@ public class Application {
         // Добавление чата
         app.post("/add-to-chat", new AddToChatHandler());
 
+        // Восстановление истории чата
+        app.post("/get-history", new GetHistoryHandler());
+
+
         // Назначение админа чата
         app.post("/set-admin-chat", new SetAdminChatHandler());
 
-        app.sse("/sse", new SseHandler());
+        // Проверка пользователя на права админа
+        app.post("/get-is-admin", new GetIsAdminHandler());
 
-        // Восстановление истории чата
-        app.post("/get-history", new GetHistoryHandler());
+
 
         // Загружаем картинку пользователя
         app.post("/avatar", new AvatarUserUploadHandler());
@@ -63,14 +77,13 @@ public class Application {
         // Получаем картинку чата
         app.get("/avatar-chat", new AvatarChatHandler());
 
-        // Получаем файл сообщения
-        app.get("/file-in-message", new GetFileInMessageHandler());
 
         //Заполняем описание профиля
         app.post("/profile", new FillingProfileHandler());
 
         //Заполняем описание чата
         app.post("/edit-chat", new FillingChatHandler());
+
 
         // Список чатов
         app.get("/get-chats", new GetChatsHandler());
@@ -81,15 +94,14 @@ public class Application {
         // Список пользователей чата
         app.post("/get-users-chat", new GetUsersChatHandler());
 
+
+        // Авторизация
+        app.post("/auth", new AuthHandler());
+
         // Проверка на онлайн
         app.get("/online", new OnlineHandler());
 
-        app.post("/delete-message", new DeleteMessageHandler());
-
-        app.post("/get-is-admin", new GetIsAdminHandler());
-
-        app.post("/edit-message", new EditMessageHandler());
-
-        app.post("/read-message", new ReadMessageHandler());
+        // Sse
+        app.sse("/sse", new SseHandler());
     }
 }

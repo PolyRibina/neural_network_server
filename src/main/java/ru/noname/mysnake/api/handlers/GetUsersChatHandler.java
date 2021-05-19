@@ -4,11 +4,9 @@ import com.j256.ormlite.stmt.QueryBuilder;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import org.jetbrains.annotations.NotNull;
-import ru.noname.mysnake.api.Sse;
+import ru.noname.mysnake.api.models.ChatRequest;
 import ru.noname.mysnake.db.Database;
-import ru.noname.mysnake.db.models.Chat;
 import ru.noname.mysnake.db.models.Link;
-import ru.noname.mysnake.db.models.Message;
 import ru.noname.mysnake.db.models.User;
 
 import java.util.HashMap;
@@ -19,7 +17,7 @@ public class GetUsersChatHandler implements Handler {
     @Override
     public void handle(@NotNull Context ctx) throws Exception {
 
-        GetUsersChatRequest getUsersChatRequest = ctx.bodyAsClass(GetUsersChatRequest.class);
+        ChatRequest getUsersChatRequest = ctx.bodyAsClass(ChatRequest.class);
 
         // Получаем сообщения по чату
         QueryBuilder<Link, Integer> statementBuilder = Database.getInstance().getLinkDao().queryBuilder();
@@ -44,13 +42,5 @@ public class GetUsersChatHandler implements Handler {
         userAdmin.put("is_admin", links);
 
         ctx.json(userAdmin);
-    }
-    static class GetUsersChatRequest {
-
-        private Integer chatId;
-        public Integer getChatId() {
-            return chatId;
-        }
-
     }
 }

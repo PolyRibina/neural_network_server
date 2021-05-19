@@ -73,36 +73,4 @@ public class SendMessageHandler implements Handler {
         }
         ctx.json("Success");
     }
-
-    static class SendMessageRequest {
-
-        //private Integer chatId;
-        //private String message;
-        //private String type;
-
-        //public Integer getChatId() {
-        //    return chatId;
-        //}
-        //public String getMessage() {
-        //    return message;
-        //}
-        //public String getType() {return type; }
-    }
-
-    /*
-            DialogueMessage message = ctx.bodyAsClass(DialogueMessage.class);
-            Integer idUser = sessionAndNames.get(message.getSessionId());
-            Integer chatId = database.findChatByName(message.getChatName());
-
-            database.insertMessage(idUser, chatId, "date", message.getMessage());
-
-            String name = database.findUserById(idUser);
-            message.setSessionId(name);
-
-            for(Integer userId : database.getUsersFromChat(chatId))
-            {
-                Gson gson = new Gson();
-                clients.get(userId).sendEvent("message", gson.toJson(message));
-            }
-     */
 }

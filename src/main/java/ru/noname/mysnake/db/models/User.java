@@ -3,6 +3,7 @@ package ru.noname.mysnake.db.models;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
+
 @DatabaseTable(tableName = "users")
 public class User {
 

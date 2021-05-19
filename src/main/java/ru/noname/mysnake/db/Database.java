@@ -20,10 +20,7 @@ public class Database {
     ConnectionSource connectionSource = null;
 
     public void connect() throws Exception {
-
-
         try {
-
             connectionSource = new JdbcConnectionSource(DATABASE_URL);
             setupDatabase(connectionSource);
 
@@ -76,58 +73,4 @@ public class Database {
         }
         return db;
     }
-
-    /**
-
-
-    private void readWriteData() throws Exception {
-        // create an instance of Account
-        String name = "Jim Coakley";
-        Account account = new Account(name);
-
-        // persist the account object to the database
-        accountDao.create(account);
-        int id = account.getId();
-        verifyDb(id, account);
-
-        // assign a password
-        account.setPassword("_secret");
-        // update the database after changing the object
-        accountDao.update(account);
-        verifyDb(id, account);
-
-        // query for all items in the database
-        List<Account> accounts = accountDao.queryForAll();
-        assertEquals("Should have found 1 account matching our query", 1, accounts.size());
-        verifyAccount(account, accounts.get(0));
-
-        // loop through items in the database
-        int accountC = 0;
-        for (Account account2 : accountDao) {
-            verifyAccount(account, account2);
-            accountC++;
-        }
-        assertEquals("Should have found 1 account in for loop", 1, accountC);
-
-        // construct a query using the QueryBuilder
-        QueryBuilder<Account, Integer> statementBuilder = accountDao.queryBuilder();
-        // shouldn't find anything: name LIKE 'hello" does not match our account
-        statementBuilder.where().like(Account.NAME_FIELD_NAME, "hello");
-        accounts = accountDao.query(statementBuilder.prepare());
-        assertEquals("Should not have found any accounts matching our query", 0, accounts.size());
-
-        // should find our account: name LIKE 'Jim%' should match our account
-        statementBuilder.where().like(Account.NAME_FIELD_NAME, name.substring(0, 3) + "%");
-        accounts = accountDao.query(statementBuilder.prepare());
-        assertEquals("Should have found 1 account matching our query", 1, accounts.size());
-        verifyAccount(account, accounts.get(0));
-
-        // delete the account since we are done with it
-        accountDao.delete(account);
-        // we shouldn't find it now
-        assertNull("account was deleted, shouldn't find any", accountDao.queryForId(id));
-    }
-     */
-
-
 }

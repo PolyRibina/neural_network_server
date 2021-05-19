@@ -1,14 +1,11 @@
 package ru.noname.mysnake.api;
 
-
-import com.j256.ormlite.stmt.query.In;
 import io.javalin.http.sse.SseClient;
-
 import java.util.HashMap;
 
 public class Sse {
 
-    HashMap<Integer, SseClient> clients = new HashMap<>(); // userId? client
+    HashMap<Integer, SseClient> clients = new HashMap<>(); // userId - client
 
     // Добавление пользователя
     public void addClient(Integer id, SseClient client){

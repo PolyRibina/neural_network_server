@@ -18,13 +18,4 @@ public class AvatarChatUploadHandler implements Handler {
         FileUtils.copyInputStreamToFile(file.getContent(), new File("avatars/chatId=" + ctx.queryParam("chatId") + ".jpeg"));
         ctx.json("Success");
     }
-    //static class AvatarChatUploadRequest {
-
-     //   private Integer chatId;
-
-    //    public Integer getChatId() {
-    //        return chatId;
-    //    }
-
-    //}
 }

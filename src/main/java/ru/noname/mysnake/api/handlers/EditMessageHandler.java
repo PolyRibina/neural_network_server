@@ -35,8 +35,6 @@ public class EditMessageHandler implements Handler {
 
         List<Message> message = Database.getInstance().getMessageDao().query(statementBuilder.prepare());
 
-        List<Message> oldMessage = Database.getInstance().getMessageDao().query(statementBuilder.prepare());
-
         message.get(0).setText(ctx.queryParam("messageText"));
         message.get(0).setIsEdited(true);
         message.get(0).setWasRead(false);
@@ -67,21 +65,21 @@ public class EditMessageHandler implements Handler {
 
         Database.getInstance().getMessageDao().update(message.get(0));
 
-
+        // Получаем список пользователей чата
         QueryBuilder<Link, Integer> statementBuilderLink = Database.getInstance().getLinkDao().queryBuilder();
         statementBuilderLink.where().eq("chat_id", message.get(0).getChatId());
         List<Link> links = Database.getInstance().getLinkDao().query(statementBuilderLink.prepare());
 
+        // Получаем сообщения по чату
+        QueryBuilder<Message, Integer> statementBuilderMess = Database.getInstance().getMessageDao().queryBuilder();
+        statementBuilderMess.where().eq("chat_id", message.get(0).getChatId());
+        List<Message> messages = Database.getInstance().getMessageDao().query(statementBuilderMess.prepare());
+
         for(Link link: links){
 
             Gson gson = new Gson();
-            HashMap<String, Object> messages = new HashMap<>();
-
-            messages.put("old", oldMessage.get(0));
-            messages.put("new", message.get(0));
-
             try {
-                Sse.getInstance().getClient(link.getUserId()).sendEvent("edit", gson.toJson(messages));
+                Sse.getInstance().getClient(link.getUserId()).sendEvent("deleteMessage", gson.toJson(messages));
             }
             catch (NullPointerException e){
                 System.out.println("Клиент " + link.getUserId() + " не в сети, поэтому обновление не произошло.");

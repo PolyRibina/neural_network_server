@@ -31,18 +31,6 @@ public class Link {
     @DatabaseField(columnName = "is_admin", canBeNull = true)
     private boolean isAdmin;
 
-    @DatabaseField(canBeNull = true)
-    private Date checkChat; // дата последнего прочтения чата
-
-
-    public Date getСheckChat() {
-        return checkChat;
-    }
-
-    public void setCheckChat(Date checkChat) {
-        this.checkChat = checkChat;
-    }
-
     public boolean getIsAdmin() {
         return isAdmin;
     }

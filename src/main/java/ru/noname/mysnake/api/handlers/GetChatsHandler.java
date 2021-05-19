@@ -1,7 +1,6 @@
 package ru.noname.mysnake.api.handlers;
 
 import com.j256.ormlite.stmt.QueryBuilder;
-import com.j256.ormlite.stmt.query.In;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import org.jetbrains.annotations.NotNull;
