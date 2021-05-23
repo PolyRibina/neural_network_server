@@ -1,12 +1,10 @@
 package ru.noname.mysnake.api.handlers;
 
-import com.google.gson.Gson;
 import com.j256.ormlite.stmt.QueryBuilder;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import org.jetbrains.annotations.NotNull;
 
-import ru.noname.mysnake.api.Sse;
 import ru.noname.mysnake.db.Database;
 import ru.noname.mysnake.db.models.Chat;
 import ru.noname.mysnake.db.models.Link;
@@ -41,10 +39,10 @@ public class CreateChatHandler implements Handler {
 
         List<User> users = new LinkedList<>();
 
+        QueryBuilder<User, Integer> statementBuilder = Database.getInstance().getUserDao().queryBuilder();
         for(String userName: usersStr){
-            QueryBuilder<User, Integer> statementBuilder = Database.getInstance().getUserDao().queryBuilder();
             statementBuilder.where().eq("name", userName);
-            users.add(Database.getInstance().getUserDao().query(statementBuilder.prepare()).get(0));
+            users.addAll(Database.getInstance().getUserDao().query(statementBuilder.prepare()));
         }
 
         //List<Integer> ids = new LinkedList<>();
@@ -55,16 +53,7 @@ public class CreateChatHandler implements Handler {
 
         Database.getInstance().getLinkDao().create(links);
 
-        for(Link link: links){
-            Gson gson = new Gson();
-            try {
-                Sse.getInstance().getClient(link.getUserId()).sendEvent("newChat", "new chat");
-            }
-            catch (NullPointerException e){
-                System.out.println("Клиент не в сети, поэтому обновление не произошло.");
-            }
-
-        }
+        Refresh.doRefresh(links, "newChat", "new chat");
 
         ctx.json(chat.getId());
     }

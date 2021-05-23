@@ -13,10 +13,11 @@ public class AvatarChatHandler implements Handler {
     public void handle(@NotNull Context ctx) throws Exception {
 
         String chatId = ctx.queryParam("chatId");
-        try {
+        try{
             FileInputStream inputFile = new FileInputStream("avatars/chatId=" + chatId + ".jpeg");
             ctx.result(inputFile);
-        } catch (FileNotFoundException e) {
+        }
+        catch (FileNotFoundException e){
             System.out.println("Чат " + chatId + " без аватарки.");
         }
 

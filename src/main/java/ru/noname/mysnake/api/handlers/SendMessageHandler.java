@@ -7,7 +7,6 @@ import io.javalin.http.Handler;
 import io.javalin.http.UploadedFile;
 import org.apache.commons.io.FileUtils;
 import org.jetbrains.annotations.NotNull;
-import ru.noname.mysnake.api.Sse;
 import ru.noname.mysnake.db.Database;
 import ru.noname.mysnake.db.models.*;
 
@@ -61,16 +60,9 @@ public class SendMessageHandler implements Handler {
         statementBuilderLink.where().eq("chat_id", parseInt(ctx.queryParam("chatId")));
         List<Link> links = Database.getInstance().getLinkDao().query(statementBuilderLink.prepare());
 
-        for(Link link: links){
+        Gson gson = new Gson();
+        Refresh.doRefresh(links, "message", gson.toJson(message));
 
-            Gson gson = new Gson();
-            try {
-                Sse.getInstance().getClient(link.getUserId()).sendEvent("message", gson.toJson(message));
-            }
-            catch (NullPointerException e){
-                System.out.println("Клиент " + link.getUserId() + " не в сети, поэтому обновление не произошло.");
-            }
-        }
         ctx.json("Success");
     }
 }

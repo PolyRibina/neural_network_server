@@ -5,7 +5,6 @@ import com.j256.ormlite.stmt.QueryBuilder;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import org.jetbrains.annotations.NotNull;
-import ru.noname.mysnake.api.Sse;
 import ru.noname.mysnake.db.Database;
 import ru.noname.mysnake.db.models.Link;
 import ru.noname.mysnake.db.models.Message;
@@ -44,16 +43,8 @@ public class ReadMessageHandler implements Handler {
         statementBuilderMess.where().eq("chat_id", message.get(0).getChatId());
         List<Message> messages = Database.getInstance().getMessageDao().query(statementBuilderMess.prepare());
 
-        for(Link link: links){
-
-            Gson gson = new Gson();
-            try {
-                Sse.getInstance().getClient(link.getUserId()).sendEvent("deleteMessage", gson.toJson(messages));
-            }
-            catch (NullPointerException e){
-                System.out.println("Клиент " + link.getUserId() + " не в сети, поэтому обновление не произошло.");
-            }
-        }
+        Gson gson = new Gson();
+        Refresh.doRefresh(links, "deleteMessage", gson.toJson(messages));
 
         ctx.json("success editing");
     }

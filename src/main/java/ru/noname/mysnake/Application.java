@@ -98,6 +98,9 @@ public class Application {
         // Авторизация
         app.post("/auth", new AuthHandler());
 
+        // Регистрация
+        app.post("/check-in", new CheckInHandler());
+
         // Проверка на онлайн
         app.get("/online", new OnlineHandler());
 

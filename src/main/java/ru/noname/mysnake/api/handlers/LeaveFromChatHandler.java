@@ -1,6 +1,5 @@
 package ru.noname.mysnake.api.handlers;
 
-import com.google.gson.Gson;
 import com.j256.ormlite.stmt.QueryBuilder;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
@@ -28,7 +27,6 @@ public class LeaveFromChatHandler implements Handler {
 
             if(link.getUserId()==leaveFromChatRequest.getUserId()){
                 Database.getInstance().getLinkDao().executeRaw("DELETE FROM links WHERE chat_id = '" +link.getChatId()+ "' AND user_id = '" +link.getUserId()+ "'");
-                Gson gson = new Gson();
                 Sse.getInstance().getClient(link.getUserId()).sendEvent("newChat","leave from chat");
             }
         }
