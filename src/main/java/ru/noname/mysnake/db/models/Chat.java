@@ -28,6 +28,9 @@ public class Chat {
     @DatabaseField(canBeNull = true)
     private String bio; // описание чата
 
+    @DatabaseField(columnName = "is_private_dialog", canBeNull = false)
+    private Boolean isPrivateDialog;
+
 
     public int getId() {
         return id;
@@ -35,6 +38,14 @@ public class Chat {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public Boolean getIsPrivateDialog() {
+        return isPrivateDialog;
+    }
+
+    public void setIsPrivateDialog(Boolean isPrivateDialog) {
+        this.isPrivateDialog = isPrivateDialog;
     }
 
     public String getName() {
