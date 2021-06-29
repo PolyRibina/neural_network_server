@@ -2,109 +2,71 @@ package ru.noname.mysnake;
 
 import io.javalin.Javalin;
 import io.javalin.core.JavalinConfig;
-import ru.noname.mysnake.api.handlers.*;
-import ru.noname.mysnake.db.Database;
+import ru.noname.mysnake.api.models.Section;
+import ru.noname.mysnake.api.models.SectionsStorage;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 
 
 public class Application {
     public static void main(String[] args){
         Javalin app = Javalin.create(JavalinConfig::enableCorsForAllOrigins).start(8000);
 
-        try {
-            Database.getInstance().connect();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        SectionsStorage storage = new SectionsStorage();
+        HashMap<String, List<String>> sectionTheme = new HashMap<>();
 
-        try {
-            Path path = Paths.get("avatars");
-            Files.createDirectories(path);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        app.get("/hello", ctx -> ctx.result("Hello, world!"));
 
-        // Отправка сообщения
-        app.post("/send-message", new SendMessageHandler());
+        app.post("/set-section", ctx -> {
+            Section section = ctx.bodyAsClass(Section.class);
+            storage.addSection(section);
+            ctx.json(storage.getSections());
+        });
+        app.post("/set-theme", ctx -> {
+            String section = ctx.queryParam("section", String.class).get();
+            String theme = ctx.queryParam("theme", String.class).get();
+            List<String> themes = new LinkedList<>();
+            if(sectionTheme.containsKey(section)){
+                themes.addAll(sectionTheme.get(section));
+            }
+            themes.add(theme);
+            sectionTheme.put(section, themes);
+            ctx.json(sectionTheme.get(section));
+        });
 
-        // Редактирование сообщения
-        app.post("/edit-message", new EditMessageHandler());
+        app.get("/get-sections", ctx ->{
+            System.out.println(storage.getSections());
+            ctx.json(storage.getSections());
+            });
 
-        // Чтение сообщения
-        app.post("/read-message", new ReadMessageHandler());
+        app.post("/get-themes", ctx -> {
+            String section = ctx.queryParam("section", String.class).get();
+            System.out.println(sectionTheme.get(section));
+            try {
+                if(sectionTheme.get(section)!=null){
+                    ctx.json(sectionTheme.get(section));
+                }
+                else{
+                    ctx.status(404);
+                }
+            } catch (IndexOutOfBoundsException exc) {
+                ctx.status(404);
+            }
+        });
 
-        // Удаление сообщения
-        app.post("/delete-message", new DeleteMessageHandler());
+        app.post("/delete-themes", ctx -> {
+            String section = ctx.queryParam("section", String.class).get();
+            String theme = ctx.queryParam("theme", String.class).get();
+            List<String> themes = new LinkedList<>();
+            if(sectionTheme.containsKey(section)){
+                themes.addAll(sectionTheme.get(section));
+            }
+            themes.remove(theme);
+            sectionTheme.put(section, themes);
+            ctx.json(sectionTheme.get(section));
+        });
 
-        // Получаем файл сообщения
-        app.get("/file-in-message", new GetFileInMessageHandler());
-
-
-        // Создание нового чата
-        app.post("/new-chat", new CreateChatHandler());
-
-        // Выход из чата
-        app.post("/leave-from-chat", new LeaveFromChatHandler());
-
-        // Добавление чата
-        app.post("/add-to-chat", new AddToChatHandler());
-
-        // Восстановление истории чата
-        app.post("/get-history", new GetHistoryHandler());
-
-
-        // Назначение админа чата
-        app.post("/set-admin-chat", new SetAdminChatHandler());
-
-        // Проверка пользователя на права админа
-        app.post("/get-is-admin", new GetIsAdminHandler());
-
-
-
-        // Загружаем картинку пользователя
-        app.post("/avatar", new AvatarUserUploadHandler());
-
-        // Получаем картинку пользователя
-        app.get("/avatar", new AvatarUserHandler());
-
-        // Загружаем картинку чата
-        app.post("/avatar-chat", new AvatarChatUploadHandler());
-
-        // Получаем картинку чата
-        app.get("/avatar-chat", new AvatarChatHandler());
-
-
-        //Заполняем описание профиля
-        app.post("/profile", new FillingProfileHandler());
-
-        //Заполняем описание чата
-        app.post("/edit-chat", new FillingChatHandler());
-
-
-        // Список чатов
-        app.get("/get-chats", new GetChatsHandler());
-
-        // Список пользователей
-        app.get("/get-users", new GetUsersHandler());
-
-        // Список пользователей чата
-        app.post("/get-users-chat", new GetUsersChatHandler());
-
-
-        // Авторизация
-        app.post("/auth", new AuthHandler());
-
-        // Регистрация
-        app.post("/check-in", new CheckInHandler());
-
-        // Проверка на онлайн
-        app.get("/online", new OnlineHandler());
-
-        // Sse
-        app.sse("/sse", new SseHandler());
     }
 }
